@@ -1,8 +1,9 @@
-import { Sequelize, DataType, DataTypes } from "sequelize";
-const sequelize = new Sequelize("Admin", "Lanre", "Ismo", {
+import { Sequelize,  DataTypes } from "sequelize";
+const sequelize = new Sequelize("Finale", "root", "Lanhubs2001$$", {
   dialect: "mysql",
   host: "localhost",
   port: 3306,
+  // database: "Finale"
 });
 
 const connect = () => {
@@ -18,19 +19,24 @@ const connect = () => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      roomId:{
+      roomId: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+     
       courseCode: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       lecturerName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      startTime: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      endTime: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -41,15 +47,15 @@ const connect = () => {
   );
   const Student = sequelize.define("Attendance", {
     regNumber: {
-     
-        type: DataTypes.STRING,
-        allowNull: false,
-      
-    }
-  })
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  });
+  sequelize.sync().then(s=>console.log("tables established")).catch(e=>console.log(e))
   return {
-    Room, Student
-  }
+    Room,
+    Student,
+  };
 };
 connect();
 export default connect;
